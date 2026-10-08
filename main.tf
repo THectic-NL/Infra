@@ -25,11 +25,12 @@ module "pull_zone" {
   for_each = var.pull_zones
   source   = "./modules/pull-zone"
 
-  name                = each.value.name
-  origin_url          = each.value.origin_url
-  origin_host_header  = each.value.origin_host_header
-  override_host       = each.value.override_host
-  storage_zone_id     = each.value.storage_zone_id != null ? module.storage_zone[each.value.storage_zone_id].id : null
+  name                  = each.value.name
+  storage_zone_id       = module.storage_zone[each.value.storage_zone_id].id
+  storage_zone_hostname = module.storage_zone[each.value.storage_zone_id].hostname
+  origin_url            = each.value.origin_url
+  origin_host_header    = each.value.origin_host_header
+  override_host         = each.value.override_host
   storage_zone_permission = each.value.storage_zone_permission
-  use_staging         = each.value.use_staging
+  use_staging           = each.value.use_staging
 }

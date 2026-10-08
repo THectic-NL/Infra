@@ -3,9 +3,20 @@ variable "name" {
   type        = string
 }
 
-variable "origin_url" {
-  description = "The origin URL to pull content from"
+variable "storage_zone_id" {
+  description = "ID of the storage zone to connect to this pull zone"
   type        = string
+}
+
+variable "storage_zone_hostname" {
+  description = "Hostname of the storage zone (used as origin when connected)"
+  type        = string
+}
+
+variable "origin_url" {
+  description = "Optional external origin URL. If not provided, storage_zone_hostname is used."
+  type        = string
+  default     = null
 }
 
 variable "origin_host_header" {
@@ -16,12 +27,6 @@ variable "origin_host_header" {
 
 variable "override_host" {
   description = "Override the Host header for the origin"
-  type        = string
-  default     = null
-}
-
-variable "storage_zone_id" {
-  description = "ID of the storage zone to connect to this pull zone"
   type        = string
   default     = null
 }

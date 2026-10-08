@@ -1,33 +1,35 @@
 # =============================================
-# TEST CONFIGURATIE: 2 Storage Zones + 2 Pull Zones
+# VOORBEELD CONFIGURATIE: Storage Zones + Pull Zones
 # =============================================
 
 # Storage Zones (S3)
 storage_zones = {
-  "test-klant1" = {
-    name      = "test-klant1-storage"
+  "klant1" = {
+    name      = "klant1-storage"
     region    = "DE"
     zone_tier = "Edge"  # Goedkoopste optie
   }
-  "test-klant2" = {
-    name      = "test-klant2-storage"
+  "klant2" = {
+    name      = "klant2-storage"
     region    = "DE"
     zone_tier = "Edge"
   }
 }
 
-# Pull Zones (CDN) - gekoppeld aan storage zones
+# Pull Zones (CDN)
+# Als storage_zone_id is ingesteld, wordt de storage zone hostname
+# automatisch gebruikt als origin. Externe origin_url is optioneel.
 pull_zones = {
-  "test-klant1-cdn" = {
-    name           = "test-klant1-cdn"
-    origin_url     = "https://example.com"  # Vervang met echte origin
-    origin_host_header = "example.com"
-    storage_zone_id = "test-klant1"  # Koppelt aan storage zone hierboven
+  "klant1-cdn" = {
+    name            = "klant1-cdn"
+    storage_zone_id = "klant1"  # Gebruikt storage zone als origin
+    # origin_url is OPTIONEEL - niet nodig voor storage zone koppeling
   }
-  "test-klant2-cdn" = {
-    name           = "test-klant2-cdn"
-    origin_url     = "https://example.com"  # Vervang met echte origin
-    origin_host_header = "example.com"
-    storage_zone_id = "test-klant2"  # Koppelt aan storage zone hierboven
+  "klant2-cdn" = {
+    name            = "klant2-cdn"
+    storage_zone_id = "klant2"
+    # Voor externe origin (optioneel):
+    # origin_url     = "https://jouw-website.nl"
+    # origin_host_header = "jouw-website.nl"
   }
 }
