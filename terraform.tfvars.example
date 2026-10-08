@@ -1,2 +1,24 @@
-# Rename this file to terraform.tfvars and fill in your values
-name = "your-unique-storage-zone-name"
+# Storage zones per klant/domein
+# Elke storage zone krijgt een unieke naam en eigen hostname/password
+storage_zones = {
+  # Voorbeeld voor klant 1
+  "klant1-demo" = {
+    name      = "klant1-demo-storage"
+    region    = "DE"
+    zone_tier = "Edge"  # Goedkoopste optie
+  }
+  
+  # Voorbeeld voor klant 2
+  "klant2-prod" = {
+    name      = "klant2-production"
+    region    = "DE"
+    zone_tier = "Edge"
+  }
+  
+  # Voorbeeld: als je een specifieke regio wilt
+  # "klant3" = {
+  #   name      = "klant3-data"
+  #   region    = "NL"
+  #   zone_tier = "Edge"
+  # }
+}
