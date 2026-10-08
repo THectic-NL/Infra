@@ -1,0 +1,2 @@
+# Rename this file to terraform.tfvars and fill in your values
+name = "your-unique-storage-zone-name"

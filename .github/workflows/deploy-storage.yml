@@ -1,0 +1,38 @@
+name: Deploy Bunny.net Storage Zone
+
+on:
+  workflow_dispatch:
+    inputs:
+      storage_name:
+        description: 'Name of the storage zone (must be globally unique)'
+        required: true
+        type: string
+  push:
+    paths:
+      - 'main.tf'
+      - '.github/workflows/deploy-storage.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.13.1
+
+      - name: Initialize OpenTofu
+        run: tofu init
+        env:
+          BUNNYNET_API_KEY: ${{ secrets.BUNNYNET_API_KEY }}
+
+      - name: Create storage zone
+        run: tofu apply -auto-approve -var="name=${{ github.event.inputs.storage_name || 'infra-storage' }}"
+        env:
+          BUNNYNET_API_KEY: ${{ secrets.BUNNYNET_API_KEY }}
