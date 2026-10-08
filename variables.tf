@@ -11,13 +11,9 @@ variable "storage_zones" {
 variable "pull_zones" {
   description = "Map of pull zones to create. Key = pull zone identifier, value = pull zone config"
   type = map(object({
-    name                   = string
-    storage_zone_id       = string  # Required: key from storage_zones map
-    origin_url            = optional(string)  # Optional: external origin, uses storage zone if not provided
-    origin_host_header    = optional(string)
-    override_host         = optional(string)
-    storage_zone_permission = optional(string, "Read")
-    use_staging           = optional(bool, false)
+    name           = string
+    storage_zone_id = string  # Key from storage_zones map
+    host_header    = optional(string)
   }))
   default = {}
 }

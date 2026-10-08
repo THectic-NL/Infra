@@ -7,20 +7,16 @@ terraform {
   }
 }
 
-resource "bunnynet_pull_zone" "this" {
+resource "bunnynet_pullzone" "this" {
   name = var.name
   
-  # Use storage zone hostname as origin if no external origin_url is provided
+  # Origin: use StorageZone type to connect to storage zone
   origin {
-    host_header    = var.origin_host_header != null ? var.origin_host_header : var.storage_zone_hostname
-    origin_url    = var.origin_url != null ? var.origin_url : "https://${var.storage_zone_hostname}"
-    override_host  = var.override_host
+    type        = "StorageZone"
+    storagezone = var.storage_zone_id
+    host_header = var.host_header
   }
   
-  # Storage zone to link
-  storage_zone_connection {
-    storage_zone_id = var.storage_zone_id
-    permission       = var.storage_zone_permission
-    use_staging      = var.use_staging
-  }
+  # Routing block (required)
+  routing {}
 }

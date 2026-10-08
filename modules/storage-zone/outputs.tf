@@ -4,13 +4,13 @@ output "id" {
 }
 
 output "hostname" {
-  description = "The hostname for S3 API access"
-  value       = bunnynet_storage_zone.this.hostname_s3
+  description = "The hostname for HTTP API access"
+  value       = bunnynet_storage_zone.this.hostname
 }
 
-output "hostname_edge" {
-  description = "The hostname for Edge storage access"
-  value       = bunnynet_storage_zone.this.hostname_edge
+output "hostname_s3" {
+  description = "The hostname for S3 API access"
+  value       = bunnynet_storage_zone.this.hostname_s3
 }
 
 output "password" {

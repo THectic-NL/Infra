@@ -1,14 +1,14 @@
 output "id" {
   description = "The ID of the pull zone"
-  value       = bunnynet_pull_zone.this.id
+  value       = bunnynet_pullzone.this.id
 }
 
-output "hostname" {
-  description = "The hostname of the pull zone"
-  value       = bunnynet_pull_zone.this.hostname
+output "cdn_domain" {
+  description = "The CNAME domain of the pull zone for setting up custom hostnames"
+  value       = bunnynet_pullzone.this.cdn_domain
 }
 
 output "name" {
   description = "The name of the pull zone"
-  value       = bunnynet_pull_zone.this.name
+  value       = bunnynet_pullzone.this.name
 }

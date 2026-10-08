@@ -5,40 +5,11 @@ variable "name" {
 
 variable "storage_zone_id" {
   description = "ID of the storage zone to connect to this pull zone"
-  type        = string
+  type        = number
 }
 
-variable "storage_zone_hostname" {
-  description = "Hostname of the storage zone (used as origin when connected)"
-  type        = string
-}
-
-variable "origin_url" {
-  description = "Optional external origin URL. If not provided, storage_zone_hostname is used."
+variable "host_header" {
+  description = "The Host header to send to the origin (optional)"
   type        = string
   default     = null
-}
-
-variable "origin_host_header" {
-  description = "The Host header to send to the origin"
-  type        = string
-  default     = null
-}
-
-variable "override_host" {
-  description = "Override the Host header for the origin"
-  type        = string
-  default     = null
-}
-
-variable "storage_zone_permission" {
-  description = "Permission level for the storage zone connection (Read, ReadWrite)"
-  type        = string
-  default     = "Read"
-}
-
-variable "use_staging" {
-  description = "Use staging environment for the storage zone"
-  type        = bool
-  default     = false
 }
