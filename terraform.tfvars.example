@@ -1,24 +1,33 @@
-# Storage zones per klant/domein
-# Elke storage zone krijgt een unieke naam en eigen hostname/password
+# =============================================
+# TEST CONFIGURATIE: 2 Storage Zones + 2 Pull Zones
+# =============================================
+
+# Storage Zones (S3)
 storage_zones = {
-  # Voorbeeld voor klant 1
-  "klant1-demo" = {
-    name      = "klant1-demo-storage"
+  "test-klant1" = {
+    name      = "test-klant1-storage"
     region    = "DE"
     zone_tier = "Edge"  # Goedkoopste optie
   }
-  
-  # Voorbeeld voor klant 2
-  "klant2-prod" = {
-    name      = "klant2-production"
+  "test-klant2" = {
+    name      = "test-klant2-storage"
     region    = "DE"
     zone_tier = "Edge"
   }
-  
-  # Voorbeeld: als je een specifieke regio wilt
-  # "klant3" = {
-  #   name      = "klant3-data"
-  #   region    = "NL"
-  #   zone_tier = "Edge"
-  # }
+}
+
+# Pull Zones (CDN) - gekoppeld aan storage zones
+pull_zones = {
+  "test-klant1-cdn" = {
+    name           = "test-klant1-cdn"
+    origin_url     = "https://example.com"  # Vervang met echte origin
+    origin_host_header = "example.com"
+    storage_zone_id = "test-klant1"  # Koppelt aan storage zone hierboven
+  }
+  "test-klant2-cdn" = {
+    name           = "test-klant2-cdn"
+    origin_url     = "https://example.com"  # Vervang met echte origin
+    origin_host_header = "example.com"
+    storage_zone_id = "test-klant2"  # Koppelt aan storage zone hierboven
+  }
 }

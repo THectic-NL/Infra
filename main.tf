@@ -11,11 +11,25 @@ terraform {
 provider "bunnynet" {}
 
 # Storage zones per klant/domein
-module "storage_zones" {
+module "storage_zone" {
   for_each = var.storage_zones
   source   = "./modules/storage-zone"
 
   name      = each.value.name
   region    = each.value.region
   zone_tier = each.value.zone_tier
+}
+
+# Pull zones for CDN
+module "pull_zone" {
+  for_each = var.pull_zones
+  source   = "./modules/pull-zone"
+
+  name                = each.value.name
+  origin_url          = each.value.origin_url
+  origin_host_header  = each.value.origin_host_header
+  override_host       = each.value.override_host
+  storage_zone_id     = each.value.storage_zone_id != null ? module.storage_zone[each.value.storage_zone_id].id : null
+  storage_zone_permission = each.value.storage_zone_permission
+  use_staging         = each.value.use_staging
 }

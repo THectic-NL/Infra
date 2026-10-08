@@ -7,3 +7,17 @@ variable "storage_zones" {
   }))
   default = {}
 }
+
+variable "pull_zones" {
+  description = "Map of pull zones to create. Key = pull zone identifier, value = pull zone config"
+  type = map(object({
+    name                   = string
+    origin_url            = string
+    origin_host_header    = optional(string)
+    override_host         = optional(string)
+    storage_zone_id       = optional(string)  # Key from storage_zones map
+    storage_zone_permission = optional(string, "Read")
+    use_staging           = optional(bool, false)
+  }))
+  default = {}
+}
